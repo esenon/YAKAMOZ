@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services — YAKAMOZ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background-color: #ffffff;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    #topbar {
+      width: 100%;
+      max-height: 200px;
+      overflow: hidden;
+      background-color: #0a0f28;
+      position: relative;
+    }
+
+    #topbar img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      font-size: 1rem;
+      color: #333;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #0a0f28;
+      border-bottom-color: #0a0f28;
+    }
+
+    nav a.active {
+      font-weight: 700;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      padding: 0 1rem;
+      text-align: left;
+    }
+
+    h1, h2 {
+      color: #0a0f28;
+      text-align: center;
+    }
+
+    section.service {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+    }
+
+    section.service:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    section.service h3 {
+      margin-top: 0;
+      font-weight: 700;
+      color: #0a0f28;
+    }
+
+    section.service p {
+      margin-top: 0.3rem;
+      color: #444;
+    }
+
+    hr.custom-hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 1rem auto 2rem;
+      width: 90%;
+      max-width: 700px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 2rem 1rem;
+      color: #666;
+    }
+
+    /* Responsive Nav */
+    @media (max-width: 480px) {
+      nav a {
+        display: inline-block;
+        margin: 0.5rem 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="topbar">
+    <img src="blueebru.jpg" alt="Blue Ebru water marbling artwork banner" />
+  </div>
+
+  <header>
+    <h1>Our Services</h1>
+    <nav aria-label="Primary navigation">
+      <a href="Yakamoz.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html" class="active" aria-current="page">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <hr class="custom-hr" />
+  </header>
+
+  <main>
+    <section class="service">
+      <h3>Interactive Design</h3>
+      <p>Develop customized immersive experiences that blend art and technology.</p>
+    </section>
+
+    <section class="service">
+      <h3>Web Design</h3>
+      <p>Developing innovative websites tailored to your vision.</p>
+    </section>
+
+    <section class="service">
+      <h3>Data Analysis & Visualization</h3>
+      <p>Retrieving and transforming complex data sets into clear statistics to support your website.</p>
+    </section>
+
+    <section class="service">
+      <h3>System Analysis</h3>
+      <p>Analyzing and optimizing data and design systems for better performance and insight.</p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 YAKAMOZ — Web Development & Data Sciences by Esref Önder
+  </footer>
+
+</body>
+</html>

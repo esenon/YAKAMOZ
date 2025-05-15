@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YAKAMOZ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0a0f28;
+      overflow: hidden;
+      font-family: 'Playfair Display', serif;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      z-index: 0;
+    }
+
+    .content {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scaleX(0.79);
+      color: #0a0f28;
+      text-align: center;
+      z-index: 1;
+      pointer-events: none;
+      padding: 1rem;
+      width: 90%;
+      max-width: 600px;
+      transition: color 0.3s ease;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: bold;
+      margin: 0;
+    }
+
+    p {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: normal;
+      margin-top: 10px;
+    }
+
+    .link {
+      display: block;
+      margin-top: 20px;
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      color: #aab;
+      text-decoration: none;
+      pointer-events: auto;
+      transition: color 0.3s ease;
+    }
+
+    .link:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <div class="content">
+    <h1>YAKAMOZ</h1>
+    <h2>Welcome to the world of Web Development and Innovation</h2>
+    <a class="link" href="Yakamoz.html">Click Here to Visit our Webpage</a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    let dpr = window.devicePixelRatio || 1;
+    let width = canvas.width = window.innerWidth * dpr;
+    let height = canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    ctx.scale(dpr, dpr);
+
+    const cellSize = 6;
+    let cols = Math.floor(window.innerWidth / cellSize);
+    let rows = Math.floor(window.innerHeight / cellSize);
+
+    let grid = Array.from({ length: rows }, () => Array(cols).fill(0));
+    let nextGrid = Array.from({ length: rows }, () => Array(cols).fill(0));
+
+    let mouse = { x: -9999, y: -9999 };
+    canvas.addEventListener("mousemove", e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    canvas.addEventListener("touchmove", e => {
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    });
+
+    function getNeighbors(r, c) {
+      let count = 0;
+      for (let dr = -1; dr <= 1; dr++) {
+        for (let dc = -1; dc <= 1; dc++) {
+          if (dr === 0 && dc === 0) continue;
+          const rr = (r + dr + rows) % rows;
+          const cc = (c + dc + cols) % cols;
+          if (grid[rr][cc] === 1) count++;
+        }
+      }
+      return count;
+    }
+
+    function updateAutomata() {
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const state = grid[r][c];
+          const neighbors = getNeighbors(r, c);
+          const dist = Math.hypot(mouse.x - (c * cellSize), mouse.y - (r * cellSize));
+
+          if (state === 0 && neighbors === 2) {
+            nextGrid[r][c] = 1;
+          } else if (state === 1) {
+            nextGrid[r][c] = 2;
+          } else if (state === 2) {
+            nextGrid[r][c] = 0;
+          } else {
+            nextGrid[r][c] = state;
+          }
+
+          if (dist < 80 && Math.random() < 0.02) {
+            nextGrid[r][c] = 1;
+          }
+        }
+      }
+
+      [grid, nextGrid] = [nextGrid, grid];
+    }
+
+    function draw() {
+      ctx.fillStyle = "rgba(10, 15, 40, 0.2)";
+      ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const state = grid[r][c];
+          if (state === 0) continue;
+
+          const px = c * cellSize;
+          const py = r * cellSize;
+          const dist = Math.hypot(mouse.x - px, mouse.y - py);
+          const maxDist = 200;
+          const norm = Math.min(dist / maxDist, 1);
+          const lightness = 90 - norm * 80;
+
+          ctx.fillStyle = `hsl(220, 100%, ${lightness - (state === 2 ? 10 : 0)}%)`;
+          ctx.fillRect(px, py, cellSize, cellSize);
+        }
+      }
+    }
+
+    function loop() {
+      updateAutomata();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    loop();
+
+    window.addEventListener("resize", () => {
+      dpr = window.devicePixelRatio || 1;
+      width = canvas.width = window.innerWidth * dpr;
+      height = canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.scale(dpr, dpr);
+
+      cols = Math.floor(window.innerWidth / cellSize);
+      rows = Math.floor(window.innerHeight / cellSize);
+      grid = Array.from({ length: rows }, () => Array(cols).fill(0));
+      nextGrid = Array.from({ length: rows }, () => Array(cols).fill(0));
+    });
+
+    canvas.addEventListener('mousemove', updateTextColor);
+    canvas.addEventListener('touchmove', updateTextColor);
+
+    function updateTextColor() {
+      const dist = Math.hypot(mouse.x - (window.innerWidth / 2), mouse.y - (window.innerHeight / 2));
+      const maxDist = 300;
+      const norm = Math.min(dist / maxDist, 1);
+      const textColor = `hsl(220, 100%, ${90 - norm * 80}%)`;
+      document.querySelector('.content').style.color = textColor;
+    }
+  </script>
+</body>
+</html>

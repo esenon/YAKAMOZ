@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — YAKAMOZ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      color: #222;
+      background-color: #ffffff;
+      line-height: 1.6;
+    }
+
+    #topbar {
+      height: 200px;
+      width: 100%;
+      background-image: url('blueebru.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    header h1 {
+      color: #0a0f28;
+      margin-bottom: 0.5rem;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      font-size: 1rem;
+      color: #333;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      border-bottom-color: #333;
+    }
+
+    nav a.active {
+      color: #0a0f28;
+      font-weight: 700;
+      border-bottom-color: #0a0f28;
+    }
+
+    nav a.active[aria-current="page"] {
+      /* For accessibility */
+    }
+
+    hr.custom-hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 0 auto 2rem;
+      width: 90%;
+      max-width: 700px;
+    }
+
+    main {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+    }
+
+    section {
+      margin: 2rem 0;
+      padding-bottom: 1rem;
+    }
+
+    section p {
+      color: #444;
+      margin-top: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 2rem 1rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar with static image -->
+  <div id="topbar"></div>
+
+  <header>
+    <h1>YAKAMOZ</h1>
+    <nav aria-label="Primary navigation">
+      <a href="Yakamoz.html">Home</a>
+      <a href="about.html" class="active" aria-current="page">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <hr class="custom-hr" />
+  </header>
+
+  <main>
+    <section>
+      <h2>About</h2>
+      <p>YAKAMOZ is a creative technology studio exploring the boundary between design, data, and digital art. Our name, YAKAMOZ, can most closely be translated as the moonlight’s reflection on water, and we hope our work brings that same reflection of beauty of your vision to the digital world.</p>
+      <p>We create interactive visuals, generative systems, and custom tools that combine aesthetics with purpose. Our goal is to build experiences that are as thoughtful as they are innovative.</p>
+      <p>YAKAMOZ was founded as a space for experimentation, collaboration, and exploring how design and code can reflect the complexity of the world around us.</p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 YAKAMOZ — Web Development & Data Sciences by Esref Önder
+  </footer>
+</body>
+</html>
