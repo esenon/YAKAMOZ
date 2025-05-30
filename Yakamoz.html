@@ -285,5 +285,41 @@ canvas.addEventListener("mouseleave", () => {
   <footer>
     &copy; 2025 YAKAMOZ — Web Development & Data Sciences
   </footer>
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const intro = document.getElementById("intro");
+    const header = document.querySelector("header");
+    const main = document.querySelector("main");
+    const footer = document.querySelector("footer");
+
+    const hasPlayed = localStorage.getItem("introPlayed");
+
+    if (hasPlayed) {
+      // Skip intro animation on repeat visits
+      if (intro) {
+        intro.style.display = "none";
+      }
+
+      if (header) {
+        header.style.opacity = 1;
+        header.style.animation = "none";
+      }
+
+      if (main) {
+        main.style.opacity = 1;
+        main.style.animation = "none";
+      }
+
+      if (footer) {
+        footer.style.opacity = 1;
+        footer.style.animation = "none";
+      }
+    } else {
+      // Let the animation run normally and mark it as played
+      localStorage.setItem("introPlayed", "true");
+    }
+  });
+</script>
+
 </body>
 </html>
